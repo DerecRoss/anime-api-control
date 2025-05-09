@@ -6,13 +6,12 @@ import academy.devdojo.springboot2.mapper.AnimeMapper;
 import academy.devdojo.springboot2.repository.AnimeRepository;
 import academy.devdojo.springboot2.requests.AnimeDto;
 import academy.devdojo.springboot2.requests.AnimePostRequestBody;
-import academy.devdojo.springboot2.requests.AnimePutRequestBody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.hibernate.query.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -22,7 +21,7 @@ public class AnimeService{
     private final AnimeMapper animeMapper;
     private final AnimeRepository animeRepository;
 
-    public List<Anime> listAll(){
+    public List<Anime> listAll(Pageable pageable){
         return animeRepository.findAll();
     }
 
