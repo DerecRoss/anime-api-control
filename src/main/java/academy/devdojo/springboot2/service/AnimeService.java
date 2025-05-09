@@ -8,10 +8,10 @@ import academy.devdojo.springboot2.requests.AnimeDto;
 import academy.devdojo.springboot2.requests.AnimePostRequestBody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.Page;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -21,8 +21,8 @@ public class AnimeService{
     private final AnimeMapper animeMapper;
     private final AnimeRepository animeRepository;
 
-    public List<Anime> listAll(Pageable pageable){
-        return animeRepository.findAll();
+    public Page<Anime> listAll(Pageable pageable){
+        return animeRepository.findAll(pageable);
     }
 
     public List<Anime> findByName(String name){
