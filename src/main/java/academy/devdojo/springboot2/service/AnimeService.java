@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +50,9 @@ public class AnimeService{
         Anime anime = animeMapper.toAnime(animePutRequestBody);
         anime.setId(savedAnime.getId());
         animeRepository.save(anime);
+    }
+
+    public List<Anime> listAllNoPageable() {
+        return animeRepository.findAll();
     }
 }
