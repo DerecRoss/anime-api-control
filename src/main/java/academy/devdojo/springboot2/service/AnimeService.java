@@ -6,6 +6,7 @@ import academy.devdojo.springboot2.mapper.AnimeMapper;
 import academy.devdojo.springboot2.repository.AnimeRepository;
 import academy.devdojo.springboot2.requests.AnimeDto;
 import academy.devdojo.springboot2.requests.AnimePostRequestBody;
+import academy.devdojo.springboot2.requests.AnimePutRequestBody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,7 +46,7 @@ public class AnimeService{
         animeRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public void replace(AnimeDto animePutRequestBody){
+    public void replace(AnimePutRequestBody animePutRequestBody){
         Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
         Anime anime = animeMapper.toAnime(animePutRequestBody);
         anime.setId(savedAnime.getId());
