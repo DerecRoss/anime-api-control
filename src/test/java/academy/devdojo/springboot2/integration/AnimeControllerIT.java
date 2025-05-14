@@ -37,12 +37,17 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
         Anime savedAnime = animeRepository.save(AnimeGenerator.animeGeneratorToBeSaved());
         String expectedName = savedAnime.getName();
 
-        PageableResponse<Anime> bodyPage = testRestTemplate.exchange("/animes", HttpMethod.GET, null,
+        PageableResponse<Anime> bodyPage = testRestTemplate.exchange("/animes",
+                HttpMethod.GET,
+                null,
                 new ParameterizedTypeReference<PageableResponse<Anime>>() {
                 }).getBody();
 
         Assertions.assertThat(bodyPage).isNotNull();
-        Assertions.assertThat(bodyPage.toList()).isNotEmpty().hasSize(1);
+        Assertions.assertThat(bodyPage.toList())
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(1);
         Assertions.assertThat(bodyPage.toList().get(0).getName()).isEqualTo(expectedName);
     }
 }
