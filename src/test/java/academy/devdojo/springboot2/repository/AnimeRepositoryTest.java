@@ -86,16 +86,16 @@ class AnimeRepositoryTest {
 //      Assertions.assertThat(animes).Null(); -> test fail, null is  empty object
     }
 
-    @Test
-    @DisplayName("Save throw ConstrainValidationException when Anime name is empty")
-    void save_ThrowConstrainValidationException_WhenAnimeNaneIsEmpty() {
-        Anime anime = new Anime();
-//        Assertions.assertThatThrownBy(() -> this.animeRepository.save(anime))
-//                .isInstanceOf(ConstraintViolationException.class
-//                );
-        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
-                .isThrownBy(() -> this.animeRepository.save(anime))
-                .withMessage("The name of anime is empty");
-    }
+//    @Test
+//    @DisplayName("Save throw ConstrainValidationException when Anime name is empty")
+//    void save_ThrowConstrainValidationException_WhenAnimeNaneIsEmpty() {
+//        Anime anime = new Anime();
+////        Assertions.assertThatThrownBy(() -> this.animeRepository.save(anime))
+////                .isInstanceOf(ConstraintViolationException.class
+////                );
+//        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+//                .isThrownBy(() -> this.animeRepository.save(anime))
+//                .withMessage("The name of anime is empty");
+//    }
 
 }

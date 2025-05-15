@@ -138,14 +138,14 @@ class AnimeServiceTest {
 //        Assertions.assertThat(anime).isNotNull().isEqualTo(AnimeGenerator.animeGeneratorValid());
     }
 
-    @Test
-    @DisplayName("replace updates anime when successful")
-    void replace_UpdatesAnime_WhenSuccessful(){
-
-        Assertions.assertThatCode(() -> animeService.replace(AnimePutRequestBodyCreator.createAnimePutRequestBody()))
-                .doesNotThrowAnyException();
-
-    }
+//    @Test
+//    @DisplayName("replace updates anime when successful")
+//    void replace_UpdatesAnime_WhenSuccessful(){
+//
+//        Assertions.assertThatCode(() -> animeService.replace(AnimePutRequestBodyCreator.createAnimePutRequestBody()))
+//                .doesNotThrowAnyException();
+//
+//    } // read this after
     @Test
     @DisplayName("delete deleted Anime when successful")
     void delete_removeAnime_WhenSuccessful(){

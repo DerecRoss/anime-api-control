@@ -120,6 +120,7 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
 
         Assertions.assertThat(animes)
                 .isNotNull()
+                .hasSize(0)
                 .isEmpty();
     }
 
@@ -145,7 +146,8 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
         savedAnime.setName("New name");
 
             ResponseEntity<Void> animeResponseEntity = testRestTemplate.exchange("/animes",
-                HttpMethod.PUT, new HttpEntity<>(savedAnime), Void.class);
+                    HttpMethod.PUT, new HttpEntity<>(savedAnime), new ParameterizedTypeReference<Void>() {
+                    });
 
         Assertions.assertThat(animeResponseEntity).isNotNull();
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
@@ -158,7 +160,8 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
         Anime savedAnime = animeRepository.save(AnimeGenerator.animeGeneratorToBeSaved());
 
         ResponseEntity<Void> animeResponseEntity = testRestTemplate.exchange("/animes/{id}",
-                HttpMethod.DELETE, null , Void.class, savedAnime.getId());
+                HttpMethod.DELETE, null, new ParameterizedTypeReference<Void>() {
+                }, savedAnime.getId());
 
         Assertions.assertThat(animeResponseEntity).isNotNull();
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
