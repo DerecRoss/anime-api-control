@@ -4,17 +4,16 @@ import academy.devdojo.springboot2.domain.Anime;
 import academy.devdojo.springboot2.exception.BadRequestException;
 import academy.devdojo.springboot2.mapper.AnimeMapper;
 import academy.devdojo.springboot2.repository.AnimeRepository;
-import academy.devdojo.springboot2.requests.AnimeDto;
 import academy.devdojo.springboot2.requests.AnimePostRequestBody;
 import academy.devdojo.springboot2.requests.AnimePutRequestBody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +22,7 @@ public class AnimeService{
     private final AnimeMapper animeMapper;
     private final AnimeRepository animeRepository;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Page<Anime> listAll(Pageable pageable){
         return animeRepository.findAll(pageable);
     }
@@ -37,6 +37,7 @@ public class AnimeService{
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public Anime save(AnimePostRequestBody animePostRequestBody){
         Anime anime = animeMapper.toAnime(animePostRequestBody);
         return animeRepository.save(anime);
@@ -53,6 +54,7 @@ public class AnimeService{
         animeRepository.save(anime);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Anime> listAllNoPageable() {
         return animeRepository.findAll();
     }

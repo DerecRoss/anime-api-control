@@ -120,7 +120,6 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
 
         Assertions.assertThat(animes)
                 .isNotNull()
-                .hasSize(0)
                 .isEmpty();
     }
 
