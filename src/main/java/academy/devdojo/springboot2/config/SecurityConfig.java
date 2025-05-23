@@ -30,10 +30,13 @@ public class SecurityConfig {
         httpSecurity
                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) ->
-                auth.anyRequest()
-                    .authenticated()
+                auth
+                        .requestMatchers("/animes/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/animes/**").hasAnyRole("USER")
+                        .anyRequest()
+                        .authenticated()
         )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults()) // possible pass the url for login page ex: "/login"
                 .httpBasic(Customizer.withDefaults());
 
         return httpSecurity.build();

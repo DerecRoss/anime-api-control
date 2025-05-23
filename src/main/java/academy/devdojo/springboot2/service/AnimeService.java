@@ -22,7 +22,6 @@ public class AnimeService{
     private final AnimeMapper animeMapper;
     private final AnimeRepository animeRepository;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Page<Anime> listAll(Pageable pageable){
         return animeRepository.findAll(pageable);
     }
@@ -37,7 +36,6 @@ public class AnimeService{
     }
 
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
     public Anime save(AnimePostRequestBody animePostRequestBody){
         Anime anime = animeMapper.toAnime(animePostRequestBody);
         return animeRepository.save(anime);
@@ -54,7 +52,6 @@ public class AnimeService{
         animeRepository.save(anime);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<Anime> listAllNoPageable() {
         return animeRepository.findAll();
     }
