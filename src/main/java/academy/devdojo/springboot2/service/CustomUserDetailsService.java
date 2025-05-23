@@ -1,21 +1,17 @@
 package academy.devdojo.springboot2.service;
 
-import academy.devdojo.springboot2.domain.DevDojoUser;
-import academy.devdojo.springboot2.repository.UserRepository;
+import academy.devdojo.springboot2.repository.DevDojoUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final DevDojoUserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
