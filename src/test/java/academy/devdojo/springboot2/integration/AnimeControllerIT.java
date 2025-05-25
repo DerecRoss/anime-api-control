@@ -66,6 +66,7 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
                     .basicAuthentication("derec", "berserk");
             return new TestRestTemplate(restTemplateBuilder);
         }
+
     }
 //    @LocalServerPort // get actual port running in server. if port = 0 tomcat use random port for server.
 //    private int port;
@@ -214,7 +215,7 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
 
         AnimePostRequestBody animePostRequestBody = AnimePostRequestBodyCreator.createAnimePostRequestBody();
 
-        ResponseEntity<Anime> animeResponseEntity = testRestTemplateRoleAdmin.postForEntity("/animes", animePostRequestBody, Anime.class);
+        ResponseEntity<Anime> animeResponseEntity = testRestTemplateRoleAdmin.postForEntity("/animes/admin", animePostRequestBody, Anime.class);
 
         Assertions.assertThat(animeResponseEntity).isNotNull();
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -239,7 +240,7 @@ public class AnimeControllerIT { //IT -> integration, easy to read with maven ex
 
         savedAnime.setName("New name");
 
-            ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleAdmin.exchange("/animes",
+            ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleAdmin.exchange("/animes/admin",
                     HttpMethod.PUT, new HttpEntity<>(savedAnime), new ParameterizedTypeReference<Void>() {
                     });
 
