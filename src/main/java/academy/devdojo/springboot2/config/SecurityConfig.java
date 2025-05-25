@@ -33,6 +33,7 @@ public class SecurityConfig {
                 auth
                         .requestMatchers("/animes/admin/**").hasRole("ADMIN")
                         .requestMatchers("/animes/**").hasAnyRole("USER")
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest()
                         .authenticated()
         )
