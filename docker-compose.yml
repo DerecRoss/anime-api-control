@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.4'
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -9,6 +9,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
       - "9090:9090"
+    mem_limit: 128m
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -17,5 +18,13 @@ services:
     container_name: grafana
     ports:
       - "3000:3000"
+    mem_limit: 128m
+
+  springboot2-essentials:
+    image: derecross/springboot2-essentials:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    mem_limit: 512m
+
 volumes:
   devdojo_data:
